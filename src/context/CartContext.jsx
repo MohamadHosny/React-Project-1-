@@ -1,35 +1,29 @@
 import React, { createContext, useContext, useState } from "react";
 
-// Create CartContext
+// Create Context
 const CartContext = createContext();
 
-// Create a provider component
+// Provider Component
 export const CartProvider = ({ children }) => {
+  const [products, setProducts] = useState([
+    { id: 1, name: "strawberry", price: 20, image: "../../images/strawberrysundae.png", quantity: 5 },
+    { id: 2, name: "chocolate ", price: 30, image: "../../images/chocolateship.png", quantity: 3 },
+  ]);
+
   const [cartItems, setCartItems] = useState([]);
 
   const addToCart = (product) => {
-    setCartItems((prevCartItems) => {
-      const existingItem = prevCartItems.find(item => item.id === product.id);
-      if (existingItem) {
-        // If product exists in cart, increase quantity
-        return prevCartItems.map(item =>
-          item.id === product.id
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
-        );
-      } else {
-        // Otherwise, add product to cart with quantity 1
-        return [...prevCartItems, { ...product, quantity: 1 }];
-      }
-    });
+    setCartItems((prevItems) => [...prevItems, product]);
   };
 
   return (
-    <CartContext.Provider value={{ cartItems, addToCart }}>
+    <CartContext.Provider value={{ products, cartItems, addToCart }}>
       {children}
     </CartContext.Provider>
   );
 };
 
-// Create a custom hook to use CartContext
-export const useCart = () => useContext(CartContext);
+// Custom Hook
+export const useCart = () => {
+  return useContext(CartContext);
+};

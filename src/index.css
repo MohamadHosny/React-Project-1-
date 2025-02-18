@@ -195,3 +195,10 @@ button:hover {
   color: red;
   font-size: 12px;
 }
+/* Search Bar */
+input.form-control {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  display: block;
+}
