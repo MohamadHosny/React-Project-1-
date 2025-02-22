@@ -33,11 +33,9 @@ const Login = () => {
 
     setErrors(newErrors);
 
-    // If no errors, simulate successful login
     if (Object.keys(newErrors).length === 0) {
       alert("Login successful!");
-      // You can store the user details in the context or local storage here if needed.
-      // Example: localStorage.setItem("user", JSON.stringify({ name, email }));
+      
     }
   };
 
